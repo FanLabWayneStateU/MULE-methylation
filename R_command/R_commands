@@ -154,3 +154,314 @@ plot11=ggplot(dataset11,aes(x=GC,color=Gene_type))+geom_density()+
     panel.background = element_blank(),legend.position="none")
 
 grid.arrange(plot1,plot2,plot3,plot4,plot5,plot6,plot7,plot8,plot9,plot10,plot11,ncol=3)
+
+####Plot Methylation level of parental sequences and non-TE genes
+japo_Asian_methy=read.table("japo_internal_MULE_c_coor_par_new_masked_gene_mule_parental_seq_japo_methy_w_methy3_1_stat")
+japo_AA_methy=read.table("japo_internal_MULE_c_coor_gene_no_te_maker_new1_mid200_deep_random_gene_nonTE_japo_methy_w_methy3_1_stat")
+
+dataset1=data.frame(methy=c(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V5>=0.5),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V5>=0.5),]$V4),type=c(rep("parental",length(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V5>=0.5),]$V4)),rep("non_TE",length(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V5>=0.5),]$V4))))
+
+dataset2=data.frame(methy=c(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V5>=0.5),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V5>=0.5),]$V4),type=c(rep("parental",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V5>=0.5),]$V4)),rep("non_TE",length(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V5>=0.5),]$V4))))
+
+dataset3=data.frame(methy=c(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V5>=0.5),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V5>=0.5),]$V4),type=c(rep("parental",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V5>=0.5),]$V4)),rep("non_TE",length(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V5>=0.5),]$V4))))
+
+plot1=ggplot(dataset1,aes(x=methy,color=type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot2=ggplot(dataset2,aes(x=methy,color=type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot3=ggplot(dataset3,aes(x=methy,color=type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+
+grid.arrange(plot1,plot2,plot3,ncol=1)
+
+
+######Plot Methylation levels of genic-MULEs with three evolutionary age
+
+japo_Asian_methy=read.table("japo_internal_MULE_c_coor_single_new_japo_methy_w_methy3_1_stat_genic1_genic_non_auto_Asian_all_new")
+japo_AA_methy=read.table("japo_internal_MULE_c_coor_single_new_japo_methy_w_methy3_1_stat_genic1_genic_non_auto_AA_new")
+japo_BB_methy=read.table("japo_internal_MULE_c_coor_single_new_japo_methy_w_methy3_1_stat_genic1_genic_non_auto_BB_all_new")
+
+dataset1=data.frame(methy=japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V5>=0.5),]$V4)
+dataset2=data.frame(methy=japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V5>=0.5),]$V4)
+dataset3=data.frame(methy=japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V5>=0.5),]$V4)
+dataset4=data.frame(methy=japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V5>=0.5),]$V4)
+dataset5=data.frame(methy=japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V5>=0.5),]$V4)
+dataset6=data.frame(methy=japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V5>=0.5),]$V4)
+dataset7=data.frame(methy=japo_BB_methy[(japo_BB_methy$V6=="CG")&(japo_BB_methy$V5>=0.5),]$V4)
+dataset8=data.frame(methy=japo_BB_methy[(japo_BB_methy$V6=="CHG")&(japo_BB_methy$V5>=0.5),]$V4)
+dataset9=data.frame(methy=japo_BB_methy[(japo_BB_methy$V6=="CHH")&(japo_BB_methy$V5>=0.5),]$V4)
+
+plot1=ggplot(dataset1,aes(x=methy))+geom_histogram(binwidth=0.01,fill="red")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot2=ggplot(dataset2,aes(x=methy))+geom_histogram(binwidth=0.01,fill="blue")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot3=ggplot(dataset3,aes(x=methy))+geom_histogram(binwidth=0.01,fill="green")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot4=ggplot(dataset4,aes(x=methy))+geom_histogram(binwidth=0.01,fill="red")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot5=ggplot(dataset5,aes(x=methy))+geom_histogram(binwidth=0.01,fill="blue")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot6=ggplot(dataset6,aes(x=methy))+geom_histogram(binwidth=0.01,fill="green",colour="green")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot7=ggplot(dataset7,aes(x=methy))+geom_histogram(binwidth=0.01,fill="red")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot8=ggplot(dataset8,aes(x=methy))+geom_histogram(binwidth=0.01,fill="blue")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+plot9=ggplot(dataset9,aes(x=methy))+geom_histogram(binwidth=0.01,fill="green")+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank())+xlab("Methylation level") 
+grid.arrange(plot1,plot4,plot7,plot2,plot5,plot8,plot3,plot6,plot9,ncol=3)
+
+#####plot the sliding window analysis of genic-MULEs
+japo_Asian_methy=read.table("methy_slide_wd_f2/japo_internal_MULE_c_coor_single_new_japo_methy_w_methy3_1_stat_genic1_genic_non_auto_Asian_all_new")
+japo_AA_methy=read.table("methy_slide_wd_f2/japo_internal_MULE_c_coor_single_new_japo_methy_w_methy3_1_stat_genic1_genic_non_auto_AA_new")
+japo_AB_methy=read.table("methy_slide_wd_f2/japo_internal_MULE_c_coor_single_new_japo_methy_w_methy3_1_stat_genic1_genic_non_auto_BB_all_new")
+
+dataset1=data.frame(y=c(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="L_FL"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="L_TIR"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="internal"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="R_TIR"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="R_FL"),]$V4),x=c(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="L_FL"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="L_TIR"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="internal"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="R_TIR"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_Asian_methy[(japo_Asian_methy$V6=="CG")&(japo_Asian_methy$V8=="R_FL"),]$V4))))
+plot1=ggplot(dataset1,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.9)+xlab("")+ylab("")
+
+dataset2=data.frame(y=c(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="L_FL"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="L_TIR"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="internal"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="R_TIR"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="R_FL"),]$V4),x=c(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="L_FL"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="L_TIR"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="internal"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="R_TIR"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHG")&(japo_Asian_methy$V8=="R_FL"),]$V4))))
+plot2=ggplot(dataset2,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.9)+xlab("")+ylab("")
+
+dataset3=data.frame(y=c(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="L_FL"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="L_TIR"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="internal"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="R_TIR"),]$V4,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="R_FL"),]$V4),x=c(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="L_FL"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="L_TIR"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="internal"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="R_TIR"),]$V1,japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_Asian_methy[(japo_Asian_methy$V6=="CHH")&(japo_Asian_methy$V8=="R_FL"),]$V4))))
+plot3=ggplot(dataset3,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.5)+xlab("")+ylab("")
+
+dataset4=data.frame(y=c(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="L_FL"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="L_TIR"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="internal"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="R_TIR"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="R_FL"),]$V4),x=c(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="L_FL"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="L_TIR"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="internal"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="R_TIR"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_AA_methy[(japo_AA_methy$V6=="CG")&(japo_AA_methy$V8=="R_FL"),]$V4))))
+plot4=ggplot(dataset4,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.9)+xlab("")+ylab("")
+
+
+dataset5=data.frame(y=c(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="L_FL"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="L_TIR"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="internal"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="R_TIR"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="R_FL"),]$V4),x=c(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="L_FL"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="L_TIR"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="internal"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="R_TIR"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_AA_methy[(japo_AA_methy$V6=="CHG")&(japo_AA_methy$V8=="R_FL"),]$V4))))
+plot5=ggplot(dataset5,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.9)+xlab("")+ylab("")
+
+dataset6=data.frame(y=c(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="L_FL"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="L_TIR"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="internal"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="R_TIR"),]$V4,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="R_FL"),]$V4),x=c(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="L_FL"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="L_TIR"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="internal"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="R_TIR"),]$V1,japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_AA_methy[(japo_AA_methy$V6=="CHH")&(japo_AA_methy$V8=="R_FL"),]$V4))))
+plot6=ggplot(dataset6,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.5)+xlab("")+ylab("")
+
+dataset7=data.frame(y=c(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="L_FL"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="L_TIR"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="internal"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="R_TIR"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="R_FL"),]$V4),x=c(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="L_FL"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="L_TIR"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="internal"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="R_TIR"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_AB_methy[(japo_AB_methy$V6=="CG")&(japo_AB_methy$V8=="R_FL"),]$V4))))
+plot7=ggplot(dataset7,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.9)+xlab("")+ylab("")
+
+
+dataset8=data.frame(y=c(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="L_FL"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="L_TIR"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="internal"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="R_TIR"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="R_FL"),]$V4),x=c(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="L_FL"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="L_TIR"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="internal"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="R_TIR"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_AB_methy[(japo_AB_methy$V6=="CHG")&(japo_AB_methy$V8=="R_FL"),]$V4))))
+plot8=ggplot(dataset8,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.9)+xlab("")+ylab("")
+
+dataset9=data.frame(y=c(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="L_FL"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="L_TIR"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="internal"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="R_TIR"),]$V4,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="R_FL"),]$V4),x=c(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="L_FL"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="L_TIR"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="internal"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="R_TIR"),]$V1,japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="R_FL"),]$V1),label=c(rep("L_FL",length(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="L_FL"),]$V4)),rep("L_TIR",length(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="L_TIR"),]$V4)),rep("internal",length(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="internal"),]$V4)),rep("R_TIR",length(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="R_TIR"),]$V4)),rep("R_FL",length(japo_AB_methy[(japo_AB_methy$V6=="CHH")&(japo_AB_methy$V8=="R_FL"),]$V4))))
+plot9=ggplot(dataset9,aes(x=x,y=y,color=label))+geom_point()+geom_line()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),
+    legend.position="none")+ylim(0,0.5)+xlab("")+ylab("")
+grid.arrange(plot1,plot4,plot7,plot2,plot5,plot8,plot3,plot6,plot9,ncol=3)
+
+######Plot the TIR identity
+japo_TIR_Asian=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_Asian_all_genic_new")
+japo_TIR_AA=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_AA_genic_new")
+japo_TIR_AB=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_BB_all_genic_new")
+rufi_TIR_Asian=read.table("pack_MULE_candidate_rufi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_Asian_all_genic_new")
+rufi_TIR_AA=read.table("pack_MULE_candidate_rufi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_AA_genic_new")
+rufi_TIR_AB=read.table("pack_MULE_candidate_rufi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_BB_all_genic_new")
+indi_TIR_Asian=read.table("pack_MULE_candidate_indi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_Asian_all_genic_new")
+
+indi_TIR_AA=read.table("pack_MULE_candidate_indi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_AA_genic_new")
+
+indi_TIR_AB=read.table("pack_MULE_candidate_indi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_BB_all_genic_new")
+niva_TIR_Asian=read.table("pack_MULE_candidate_niva_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_Asian_all_genic_new")
+niva_TIR_AA=read.table("pack_MULE_candidate_niva_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_AA_genic_new")
+
+niva_TIR_AB=read.table("pack_MULE_candidate_niva_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_BB_all_genic_new")
+glab_TIR_Asian=read.table("pack_MULE_candidate_glab_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_Asian_all_genic_new")
+
+glab_TIR_AA=read.table("pack_MULE_candidate_glab_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_AA_genic_new")
+
+glab_TIR_AB=read.table("pack_MULE_candidate_glab_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_BB_all_genic_new")
+
+bart_TIR_Asian=read.table("pack_MULE_candidate_bart_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_Asian_all_genic_new")
+bart_TIR_AA=read.table("pack_MULE_candidate_bart_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_AA_genic_new")
+
+bart_TIR_AB=read.table("pack_MULE_candidate_bart_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_tir_mafft_result_BB_all_genic_new")
+dataset1=data.frame(TIR=c(japo_TIR_Asian$V2,japo_TIR_AA$V2,japo_TIR_AB$V2),MULE_type=c(rep("Asian",length(japo_TIR_Asian$V2)),rep("AA",length(japo_TIR_AA$V2)),rep("AB",length(japo_TIR_AB$V2))))
+plot1=ggplot(dataset1,aes(x=TIR,color=MULE_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset2=data.frame(TIR=c(rufi_TIR_Asian$V2,rufi_TIR_AA$V2,rufi_TIR_AB$V2),MULE_type=c(rep("Asian",length(rufi_TIR_Asian$V2)),rep("AA",length(rufi_TIR_AA$V2)),rep("AB",length(rufi_TIR_AB$V2))))
+plot2=ggplot(dataset2,aes(x=TIR,color=MULE_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset3=data.frame(TIR=c(indi_TIR_Asian$V2,indi_TIR_AA$V2,indi_TIR_AB$V2),MULE_type=c(rep("Asian",length(indi_TIR_Asian$V2)),rep("AA",length(indi_TIR_AA$V2)),rep("AB",length(indi_TIR_AB$V2))))
+plot3=ggplot(dataset3,aes(x=TIR,color=MULE_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset4=data.frame(TIR=c(niva_TIR_Asian$V2,niva_TIR_AA$V2,niva_TIR_AB$V2),MULE_type=c(rep("Asian",length(niva_TIR_Asian$V2)),rep("AA",length(niva_TIR_AA$V2)),rep("AB",length(niva_TIR_AB$V2))))
+plot4=ggplot(dataset4,aes(x=TIR,color=MULE_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset5=data.frame(TIR=c(glab_TIR_Asian$V2,glab_TIR_AA$V2,glab_TIR_AB$V2),MULE_type=c(rep("Asian",length(glab_TIR_Asian$V2)),rep("AA",length(glab_TIR_AA$V2)),rep("AB",length(glab_TIR_AB$V2))))
+plot5=ggplot(dataset5,aes(x=TIR,color=MULE_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset6=data.frame(TIR=c(bart_TIR_Asian$V2,bart_TIR_AA$V2,bart_TIR_AB$V2),MULE_type=c(rep("Asian",length(bart_TIR_Asian$V2)),rep("AA",length(bart_TIR_AA$V2)),rep("AB",length(bart_TIR_AB$V2))))
+plot6=ggplot(dataset6,aes(x=TIR,color=MULE_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+grid.arrange(plot1,plot2,plot3,plot4,plot5,plot6,ncol=3)
+
+######Plot TE coverage
+japo_TE_Asian=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_internal_seq_only_screen.out.gff_cover_genic_non_auto_Asian_all_new")
+japo_TE_AA=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_internal_seq_only_screen.out.gff_cover_genic_non_auto_AA_new")
+japo_TE_BB=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_internal_seq_only_screen.out.gff_cover_genic_non_auto_BB_all_new")
+
+boxplot(japo_TE_Asian$V2,japo_TE_AA$V2,japo_TE_BB$V2,names=c("Asian","AA","AB"),col=c("blue","yellow","red"),outpch=NA,notch=TRUE)
+stripchart(list(japo_TE_Asian$V2,japo_TE_AA$V2,japo_TE_BB$V2), jitter=0.05, vertical=TRUE, method="jitter",add=TRUE,pch=16,col="black")
+
+######Plot the heatmap of relative expression of putative MULE-genes
+japo_exp=read.table("japo_exp_all_norm3",header=TRUE)
+Atha_con=melt(japo_exp)
+ggplot(Atha_con, aes(x=variable,y= T,fill=rescale(value)+0.1)) + geom_tile(color = "white") + scale_fill_gradient2(low = "white",high = "darkred")+theme(legend.position="none")+ylab("")+xlab("")
+
+
+
