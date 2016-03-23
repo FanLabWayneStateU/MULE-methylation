@@ -1,0 +1,156 @@
+####Plot the GC distribution of MULE-genes, MULE derived parts of MULE-genes, parental sequences of MULE-genes, and non-TE genes
+
+japo_noTE_gc=read.table("oryza_sativa_japonica.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc") 
+indi_noTE_gc=read.table("oryza_sativa_indica.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+niva_noTE_gc=read.table("oryza_nivara.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+rufi_noTE_gc=read.table("oryza_rufipogon.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+glab_noTE_gc=read.table("oryza_glaberrima.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+bart_noTE_gc=read.table("oryza_barthii.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+glum_noTE_gc=read.table("oryza_glumaepatula.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+meri_noTE_gc=read.table("oryza_meridionalis.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+punc_noTE_gc=read.table("oryza_punctata.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+brac_noTE_gc=read.table("oryza_brachyantha.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+perr_noTE_gc=read.table("leersia_perrieri.maker.gff_non_TE_deep_no_transposase_non_TE_internal_gene_seq_gc")
+
+japo_mule_part=read.table("pack_MULE_japo_gene_mule_part_exon30_gc")
+indi_mule_part=read.table("pack_MULE_indi_gene_mule_part_exon30_gc")
+niva_mule_part=read.table("pack_MULE_niva_gene_mule_part_exon30_gc")
+rufi_mule_part=read.table("pack_MULE_rufi_gene_mule_part_exon30_gc")
+glab_mule_part=read.table("pack_MULE_glab_gene_mule_part_exon30_gc")
+bart_mule_part=read.table("pack_MULE_bart_gene_mule_part_exon30_gc")
+glum_mule_part=read.table("pack_MULE_glum_gene_mule_part_exon30_gc")
+meri_mule_part=read.table("pack_MULE_meri_gene_mule_part_exon30_gc")
+punc_mule_part=read.table("pack_MULE_punc_gene_mule_part_exon30_gc")
+brac_mule_part=read.table("pack_MULE_brac_gene_mule_part_exon30_gc")
+perr_mule_part=read.table("pack_MULE_perr_gene_mule_part_exon30_gc")
+
+japo_mule_gene=read.table("pack_MULE_candidate_japo_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+indi_mule_gene=read.table("pack_MULE_candidate_indi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+niva_mule_gene=read.table("pack_MULE_candidate_niva_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+rufi_mule_gene=read.table("pack_MULE_candidate_rufi_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+glab_mule_gene=read.table("pack_MULE_candidate_glab_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+bart_mule_gene=read.table("pack_MULE_candidate_bart_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+glum_mule_gene=read.table("pack_MULE_candidate_glum_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+meri_mule_gene=read.table("pack_MULE_candidate_meri_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+punc_mule_gene=read.table("pack_MULE_candidate_punc_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+brac_mule_gene=read.table("pack_MULE_candidate_brac_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+perr_mule_gene=read.table("pack_MULE_candidate_perr_jiang_repeatscout_new_tir_final5_new_no_transposase_e9_coor_involved_exon30_gff_CDS_genic_gene_seq_gc")
+
+japo_mule_par=read.table("japo_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+indi_mule_par=read.table("indi_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+niva_mule_par=read.table("niva_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+rufi_mule_par=read.table("rufi_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+glab_mule_par=read.table("glab_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+bart_mule_par=read.table("bart_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+glum_mule_par=read.table("glum_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+meri_mule_par=read.table("meri_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+punc_mule_par=read.table("punc_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+brac_mule_par=read.table("brac_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+perr_mule_par=read.table("perr_MULE_parental_seq_genome_blastn_gene_new1_exon30_parental_parental_seq_gc")
+
+dataset1=data.frame(GC=c(japo_noTE_gc$V2,japo_mule_part$V2,japo_mule_gene$V2,japo_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(japo_noTE_gc$V2)),rep("Mule_part",length(japo_mule_part$V2)),rep("Mule_gene",length(japo_mule_gene$V2)),rep("Mule_parent",length(japo_mule_par$V2))))
+plot1=ggplot(dataset1,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset2=data.frame(GC=c(rufi_noTE_gc$V2,rufi_mule_part$V2,rufi_mule_gene$V2,rufi_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(rufi_noTE_gc$V2)),rep("Mule_part",length(rufi_mule_part$V2)),rep("Mule_gene",length(rufi_mule_gene$V2)),rep("Mule_parent",length(rufi_mule_par$V2))))
+plot2=ggplot(dataset2,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+
+dataset3=data.frame(GC=c(indi_noTE_gc$V2,indi_mule_part$V2,indi_mule_gene$V2,indi_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(indi_noTE_gc$V2)),rep("Mule_part",length(indi_mule_part$V2)),rep("Mule_gene",length(indi_mule_gene$V2)),rep("Mule_parent",length(indi_mule_par$V2))))
+plot3=ggplot(dataset3,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+
+
+dataset4=data.frame(GC=c(niva_noTE_gc$V2,niva_mule_part$V2,niva_mule_gene$V2,niva_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(niva_noTE_gc$V2)),rep("Mule_part",length(niva_mule_part$V2)),rep("Mule_gene",length(niva_mule_gene$V2)),rep("Mule_parent",length(niva_mule_par$V2))))
+plot4=ggplot(dataset4,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+
+
+dataset5=data.frame(GC=c(glab_noTE_gc$V2,glab_mule_part$V2,glab_mule_gene$V2,glab_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(glab_noTE_gc$V2)),rep("Mule_part",length(glab_mule_part$V2)),rep("Mule_gene",length(glab_mule_gene$V2)),rep("Mule_parent",length(glab_mule_par$V2))))
+plot5=ggplot(dataset5,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset6=data.frame(GC=c(bart_noTE_gc$V2,bart_mule_part$V2,bart_mule_gene$V2,bart_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(bart_noTE_gc$V2)),rep("Mule_part",length(bart_mule_part$V2)),rep("Mule_gene",length(bart_mule_gene$V2)),rep("Mule_parent",length(bart_mule_par$V2))))
+plot6=ggplot(dataset6,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+
+dataset7=data.frame(GC=c(glum_noTE_gc$V2,glum_mule_part$V2,glum_mule_gene$V2,glum_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(glum_noTE_gc$V2)),rep("Mule_part",length(glum_mule_part$V2)),rep("Mule_gene",length(glum_mule_gene$V2)),rep("Mule_parent",length(glum_mule_par$V2))))
+plot7=ggplot(dataset7,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset8=data.frame(GC=c(meri_noTE_gc$V2,meri_mule_part$V2,meri_mule_gene$V2,meri_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(meri_noTE_gc$V2)),rep("Mule_part",length(meri_mule_part$V2)),rep("Mule_gene",length(meri_mule_gene$V2)),rep("Mule_parent",length(meri_mule_par$V2))))
+plot8=ggplot(dataset8,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset9=data.frame(GC=c(punc_noTE_gc$V2,punc_mule_part$V2,punc_mule_gene$V2,punc_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(punc_noTE_gc$V2)),rep("Mule_part",length(punc_mule_part$V2)),rep("Mule_gene",length(punc_mule_gene$V2)),rep("Mule_parent",length(punc_mule_par$V2))))
+plot9=ggplot(dataset9,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset10=data.frame(GC=c(brac_noTE_gc$V2,brac_mule_part$V2,brac_mule_gene$V2,brac_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(brac_noTE_gc$V2)),rep("Mule_part",length(brac_mule_part$V2)),rep("Mule_gene",length(brac_mule_gene$V2)),rep("Mule_parent",length(brac_mule_par$V2))))
+plot10=ggplot(dataset10,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+dataset11=data.frame(GC=c(perr_noTE_gc$V2,perr_mule_part$V2,perr_mule_gene$V2,perr_mule_par$V2),Gene_type=c(rep("nonTE_gene",length(perr_noTE_gc$V2)),rep("Mule_part",length(perr_mule_part$V2)),rep("Mule_gene",length(perr_mule_gene$V2)),rep("Mule_parent",length(perr_mule_par$V2))))
+plot11=ggplot(dataset11,aes(x=GC,color=Gene_type))+geom_density()+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.border = element_blank(),
+    panel.background = element_blank(),legend.position="none")
+
+grid.arrange(plot1,plot2,plot3,plot4,plot5,plot6,plot7,plot8,plot9,plot10,plot11,ncol=3)
