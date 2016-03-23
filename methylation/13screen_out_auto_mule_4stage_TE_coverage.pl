@@ -1,4 +1,4 @@
-#! user/bin/perl -W
+#!/usr/bin/perl -W
 use strict;
 my @spe = ("japo","niva");
 for my $spe (@spe){
