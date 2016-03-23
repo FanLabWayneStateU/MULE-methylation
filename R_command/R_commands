@@ -464,4 +464,5 @@ Atha_con=melt(japo_exp)
 ggplot(Atha_con, aes(x=variable,y= T,fill=rescale(value)+0.1)) + geom_tile(color = "white") + scale_fill_gradient2(low = "white",high = "darkred")+theme(legend.position="none")+ylab("")+xlab("")
 
 
-
+#######Wilcoxon rank sum test
+wilcox.test(A,B,alternative="greater")
