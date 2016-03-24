@@ -55,9 +55,7 @@ for (my $i=0; $i<($hash{$key}->{count}-1); $i++){
 
 			$hash{$key}->{array}->[$j]->{name}="$1";
 			}
-		#	if((($hash{$key}->{array}->[$i]->{name} =~ /L$/) && ($hash{$key}->{array}->[$i]->{name} =~ /L$/))||(($hash{$key}->{array}->[$i]->{name} =~ /R$/) && ($hash{$key}->{array}->[$i]->{name} =~ /R$/))){
-			if((($hash{$key}->{array}->[$i]->{name} =~ /L$/) && ($hash{$key}->{array}->[$j]->{name} =~ /L$/))||(($hash{$key}->{array}->[$i]->{name} =~ /R$/) && ($hash{$key}->{array}->[$j]->{name} =~ /R$/))){
-
+			if((($hash{$key}->{array}->[$i]->{name} =~ /L$/) && ($hash{$key}->{array}->[$i]->{name} =~ /L$/))||(($hash{$key}->{array}->[$i]->{name} =~ /R$/) && ($hash{$key}->{array}->[$i]->{name} =~ /R$/))){
 			$mark{$i}=1;
 			$mark{$j}=1;
 			goto line1;
