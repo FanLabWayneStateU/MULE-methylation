@@ -466,3 +466,11 @@ ggplot(Atha_con, aes(x=variable,y= T,fill=rescale(value)+0.1)) + geom_tile(color
 
 #######Wilcoxon rank sum test
 wilcox.test(A,B,alternative="greater")
+
+########Fisher Test
+TeaTasting <-
+matrix(c(A, B, C, D),
+       nrow = 2,
+       dimnames = list(Guess = c("Milk", "Tea"),
+                       Truth = c("Milk", "Tea")))
+fisher.test(TeaTasting, alternative = "greater")
